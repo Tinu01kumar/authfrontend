@@ -161,14 +161,14 @@ const AdminHeader = () => {
     setMenuOpen(false);
   };
   const gotologin = () => {
-    navigate("/login");
+    navigate("login");
   };
   const gotosignup=()=>{
-navigate("/signup")
+navigate("signup")
   }
 
   const gotoadmin=()=>{
-    navigate("/admin/api")
+    navigate("admin/api")
   }
 
 
