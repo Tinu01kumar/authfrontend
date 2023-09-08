@@ -22,18 +22,18 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="" element={<Home />} />
-        <Route path="main" element={<Main userRole={userRole} />} />
+        <Route path="/main" element={<Main userRole={userRole} />} />
         <Route
-          path="login"
+          path="/login"
           element={<Login setUserRoleOnLogin={setUserRoleOnLogin} />}
         />
-        <Route path="signup" element={<Signup />} />
-        <Route path="resume" element={<Resume />} />
-        <Route path="admin/api" element={<Admin />} />
-        <Route path="forgotpassword" element={<Forgotpassword />} />
-        <Route path="otpverification/:id" element={<Otpverification />} />
-        <Route path="changepassword/:id" element={<Changepassword />} />
-        <Route path="verify/:token" element={<Verify />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/admin/api" element={<Admin />} />
+        <Route path="/forgotpassword" element={<Forgotpassword />} />
+        <Route path="/otpverification/:id" element={<Otpverification />} />
+        <Route path="/changepassword/:id" element={<Changepassword />} />
+        <Route path="/verify/:token" element={<Verify />} />
       </Routes>
     </Router>
   );

@@ -161,14 +161,14 @@ const Header = () => {
     setMenuOpen(false);
   };
   const gotologin = () => {
-    navigate("login");
+    navigate("/login");
   };
   const gotosignup=()=>{
-navigate("signup")
+navigate("/signup")
   }
 
   const gotoadmin=()=>{
-    navigate("admin/api")
+    navigate("/admin/api")
   }
 
 
@@ -176,7 +176,7 @@ navigate("signup")
 
   return (
     <Container>
-      <Link to="">
+      <Link to="/">
         <Image src={logo}></Image>{" "}
       </Link>
       {isMobile ? (

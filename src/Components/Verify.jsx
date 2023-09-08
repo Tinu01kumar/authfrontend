@@ -217,7 +217,7 @@ const Verify = () => {
 }, [token]);
 
  const gotologin=()=>{
-  navigate('login')
+  navigate('/login')
  }
 return (
   <Components>

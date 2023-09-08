@@ -162,7 +162,7 @@ const Imageandtyping = () => {
            </div>
            
 
-               <Button><Link to="resume" style={{textDecoration:"none" , color:"black" ,fontSize:'17px' , fontWeight:"600"}} >Resume</Link></Button>
+               <Button><Link to="/resume" style={{textDecoration:"none" , color:"black" ,fontSize:'17px' , fontWeight:"600"}} >Resume</Link></Button>
          </About>
     
            

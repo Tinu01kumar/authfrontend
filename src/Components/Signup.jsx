@@ -306,7 +306,7 @@ const Signup = () => {
             
           <Line><h4>OR</h4></Line>
           
-           <p>Already a User?<Linksection to="login"> <Highlight>Login</Highlight>  </Linksection></p>
+           <p>Already a User?<Linksection to="/login"> <Highlight>Login</Highlight>  </Linksection></p>
 
 
            <p>By Signup, you agree to the <Highlight>Terms & Conditions</Highlight> and acknowledge our <Highlight>Privacy Policy</Highlight></p>

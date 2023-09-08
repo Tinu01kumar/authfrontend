@@ -218,7 +218,7 @@ const navigate=useNavigate();
           console.log(id);
           alert(message);
           
-          navigate(`otpverification/${id}`);
+          navigate(`/otpverification/${id}`);
         } else {
           alert(message);
         }
@@ -274,7 +274,7 @@ const navigate=useNavigate();
             
           <Line><h4>OR</h4></Line>
           
-           <p>Don't have an account?<Linksection to="signup"> <Highlight>Sign up</Highlight>  </Linksection></p>
+           <p>Don't have an account?<Linksection to="/signup"> <Highlight>Sign up</Highlight>  </Linksection></p>
 
 
            <p>By Login, you agree to the <Highlight>Terms & Conditions</Highlight> and acknowledge our <Highlight>Privacy Policy</Highlight></p>
