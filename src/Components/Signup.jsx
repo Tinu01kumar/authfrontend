@@ -235,10 +235,15 @@ const Signup = () => {
 
     if (name && email && password === reEnterPassword ) {
       const res = await axios
-        .post("https://full-mernauth.onrender.com/register", user)
+        .post("http://localhost:9000/register", user)
         .then((res) => {
 
-          alert(res.data.message);
+          alert( "Password does not meet the criteria. Missing: are \n" + res.data.errors);
+        }) .catch((error) => {
+          if (error.response) {
+            console.error("Server Error Response Data:", error.response.data);
+          }
+          console.error("Axios Error:", error);
         });
     } else {
       alert("password not matched");
