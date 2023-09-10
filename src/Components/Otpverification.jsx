@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Changepassword from "./Changepassword";
 import { Link } from "react-router-dom";
+import {ClipLoader} from "react-spinners";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const size = {
@@ -199,6 +200,7 @@ const Inlinediv=styled.div`
 const Otpverification = () => {
     const {id}=useParams();
 const navigate=useNavigate();
+const [isLoading, setIsLoading] = useState(false);
     const [user , setuser]=useState({
       otp:"",
       
@@ -217,9 +219,10 @@ const navigate=useNavigate();
         console.log(user);
         
       try{
+        setIsLoading(true);
         const res=await axios.post(`https://full-mernauth.onrender.com/otpverification` ,{id , code:user.otp });
 
-
+        setIsLoading(false);
         const { message  } = res.data; 
            const userid=res.data.id;
         if (message === "Code is correct") {
@@ -265,11 +268,18 @@ const navigate=useNavigate();
 
 
         
-            
+{
+  isLoading ? ( <ClipLoader
+    type="Puff"
+    color="#c780fa"
+    height={50}
+    width={50}
+  />
+) : (
      
 
           <LoginButton onClick={Login}>Continue</LoginButton>
-
+)}
 
 
           

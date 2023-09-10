@@ -6,6 +6,7 @@ import axios from "axios";
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import {ClipLoader} from "react-spinners";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const size = {
@@ -171,7 +172,7 @@ const Signup = () => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(VisibilityOffIcon);
   const [passwordError, setPasswordError] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleToggle = () => {
     if (type === "password") {
       setIcon(VisibilityIcon);
@@ -234,17 +235,32 @@ const Signup = () => {
  
 
     if (name && email && password === reEnterPassword ) {
+      setIsLoading(true);
       const res = await axios
         .post("http://localhost:9000/register", user)
         .then((res) => {
+          setIsLoading(false);
+         if(res.data.position==="failure")
+         {
 
-          alert( "Password does not meet the criteria. Missing: are \n" + res.data.errors);
+           alert(res.data.errors);
+          
+        }
+         
+        else{
+
+          alert(res.data.message)
+        }
+            
+         
         }) .catch((error) => {
+        
           if (error.response) {
             console.error("Server Error Response Data:", error.response.data);
           }
           console.error("Axios Error:", error);
         });
+       
     } else {
       alert("password not matched");
     }
@@ -300,7 +316,19 @@ const Signup = () => {
             </span>
           </Inlinediv>
           {passwordError && <p style={{ color: "red" , fontSize:"1.5rem"}}>{passwordError}</p>}
-          <SignButton onClick={register}>Signup</SignButton>
+
+          {
+            isLoading ? ( <ClipLoader
+              type="Puff"
+              color="#c780fa"
+              height={50}
+              width={50}
+            />
+          ) : (
+            <SignButton onClick={register}>Signup</SignButton>
+          )
+          }
+        
           <Line>
             <h4>OR</h4>
           </Line>

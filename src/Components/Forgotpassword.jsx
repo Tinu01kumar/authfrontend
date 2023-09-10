@@ -5,7 +5,7 @@ import {useState} from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import otpverification from "./Otpverification";
 import { Link } from "react-router-dom";
-
+import {ClipLoader} from "react-spinners";
 const size = {
   mobile: "max-width:425px",
   tablet: "max-width:768px",
@@ -196,6 +196,7 @@ const Inlinediv=styled.div`
 
 const Forgotpassword = () => {
 const navigate=useNavigate();
+const [isLoading, setIsLoading] = useState(false);
     const [user , setuser]=useState({
       email:"",
   
@@ -212,15 +213,16 @@ const navigate=useNavigate();
 
      const Login= async()=>{
       try{
+        setIsLoading(true);
         const res=await axios.post("https://full-mernauth.onrender.com/forgotpassword" , user);
 
 
         const { message} = res.data; 
         const id=res.data.id;
-
+        setIsLoading(false);
         if (message==="Email is present") {
      
-          console.log(id);
+       
           alert(message);
           
           navigate(`/otpverification/${id}`);
@@ -268,11 +270,18 @@ const navigate=useNavigate();
 
         
             
-     
+{
+  isLoading ? ( <ClipLoader
+    type="Puff"
+    color="#c780fa"
+    height={50}
+    width={50}
+  />
+) : (
 
           <LoginButton onClick={Login}>Continue</LoginButton>
 
-
+)}
 
           
           

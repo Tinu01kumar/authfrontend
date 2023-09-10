@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
+import {ClipLoader} from "react-spinners";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const size = {
@@ -209,7 +209,7 @@ const {id}=useParams();
     const [type ,setType]=useState('password');
     const[icon,setIcon]=useState(VisibilityOffIcon);
 
-
+    const [isLoading, setIsLoading] = useState(false);
     const handleToggle=()=>{    
         if(type==='password'){
           setIcon(VisibilityIcon);      
@@ -232,29 +232,32 @@ const {id}=useParams();
 
 
 
-
    const register = async (e) => {
     e.preventDefault();
     const password = user.password;
     const reEnterPassword = user.reEnterPassword;
   
     try {
+      setIsLoading(true);
       if (password === reEnterPassword) {
-        const res = await axios.post(`https://full-mernauth.onrender.com/changepassword`, {
+        const res = await axios.post(`http://localhost:9000/changepassword`, {
           id: id, // Include the 'id' field in the request body
           password: password,
         });
-  
-        const { message } = res.data;
-        if (message === "success") {
+        setIsLoading(false);
+        if (res.data.position === "failure") {
+          alert(res.data.errors);
+        } else if (res.data.message === "success") {
           alert("Password changed successfully");
           navigate("/login");
         } else {
-          alert(message);
+          alert(res.data.message);
         }
       } else {
         alert("Both passwords do not match");
+
       }
+      setIsLoading(false);
     } catch (error) {
       console.log("Error while changing the password", error);
       alert(error.message);
@@ -306,12 +309,19 @@ const {id}=useParams();
 
 
 
-        
+            {
+              isLoading ? ( <ClipLoader
+                type="Puff"
+                color="#c780fa"
+                height={50}
+                width={50}
+              />
+            ) : (
             
      
 
           <LoginButton onClick={register}  >Change</LoginButton>
-
+            )}
 
 
           

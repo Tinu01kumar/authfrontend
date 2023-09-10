@@ -5,6 +5,7 @@ import {useState} from 'react';
 import {  useNavigate } from "react-router-dom";
 import forgotpassword from "./Forgotpassword"
 import { Link } from "react-router-dom";
+import {ClipLoader} from "react-spinners";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import App from "./Home";
@@ -205,7 +206,7 @@ const Login = ({ setUserRoleOnLogin}) => {
 
 
 const navigate=useNavigate();
-
+const [isLoading, setIsLoading] = useState(false);
     const [user , setuser]=useState({
       email:"",
       password:""
@@ -233,9 +234,10 @@ const navigate=useNavigate();
      const Login= async(e)=>{
       e.preventDefault();
       try{
-        const res=await axios.post("https://full-mernauth.onrender.com/login" , user);
+        setIsLoading(true);
+        const res=await axios.post("http://localhost:9000/login" , user);
 
-
+       
         const { accessToken, message , role } = res.data; // Corrected response destructuring
        
 
@@ -245,13 +247,14 @@ const navigate=useNavigate();
           
           setUserRoleOnLogin(role);
           
-          alert(message);
+          alert(res.data.message);
           
    
           navigate('/main');
         } else {
-          alert(message);
+          alert(res.data.message);
         }
+        setIsLoading(false);
       } catch (error) {
         console.log('login error', error);
         alert(error.message);
@@ -303,11 +306,18 @@ const navigate=useNavigate();
 
         
             
-     
+            {
+              isLoading ? ( <ClipLoader
+                type="Puff"
+                color="#c780fa"
+                height={50}
+                width={50}
+              />
+            ) : (
 
           <LoginButton onClick={Login}>Login</LoginButton>
 
-
+            )}
 
           
           <Forgot><Linksection to="/forgotpassword"><Highlight>Forgot password</Highlight></Linksection>  </Forgot>
