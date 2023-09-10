@@ -195,7 +195,7 @@ const Signup = () => {
     const { name, email, password, reEnterPassword } = user;
     
     if (!name || !email || password !== reEnterPassword) {
-      alert("Invalid input");
+      alert("password not matched");
       return;
     }
 
