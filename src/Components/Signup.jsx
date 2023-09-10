@@ -237,7 +237,7 @@ const Signup = () => {
     if (name && email && password === reEnterPassword ) {
       setIsLoading(true);
       const res = await axios
-        .post("http://localhost:9000/register", user)
+        .post("https://full-mernauth.onrender.com/register", user)
         .then((res) => {
           setIsLoading(false);
          if(res.data.position==="failure")

@@ -240,7 +240,7 @@ const {id}=useParams();
     try {
       setIsLoading(true);
       if (password === reEnterPassword) {
-        const res = await axios.post(`http://localhost:9000/changepassword`, {
+        const res = await axios.post(`https://full-mernauth.onrender.com/changepassword`, {
           id: id, // Include the 'id' field in the request body
           password: password,
         });
