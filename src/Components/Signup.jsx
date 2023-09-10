@@ -199,6 +199,13 @@ const Signup = () => {
       return;
     }
 
+
+    if (!validator.isEmail(email)) {
+      alert("Invalid email address");
+      return;
+    }
+
+
     const isStrongPassword = validator.isStrongPassword(password, {
       minLength: 8,
       minLowercase: 1,
@@ -224,11 +231,7 @@ const Signup = () => {
       return;
     }
 
-    if (!validator.isEmail(email)) {
-      alert("Invalid email address");
-      return;
-    }
-
+ 
 
     if (name && email && password === reEnterPassword && isStrongPassword) {
       const res = await axios
