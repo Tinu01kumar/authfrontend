@@ -79,7 +79,7 @@ const Main = ({userRole}) => {
         </CircleContainer>
         <ContentContainer style={fadeIn}>
           <AnimatedText style={textAnimation}>
-            Welcome to Your Authenticated MERN Stack Website
+           
           </AnimatedText>
           <UpcomingSurprise>
             Stay tuned for an exciting surprise coming in the upcoming days!

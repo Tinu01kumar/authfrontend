@@ -54,7 +54,7 @@ flex-direction: column;
     border-radius:3rem;
 }
 &>button:hover{
-    border:2px solid green;
+    
 }
 & > p 
 {
@@ -98,7 +98,12 @@ font-size:16px;
 height: 48px;
 border-radius: 2px;
 border:none;
+&:hover{
+  background:white;
+  outline:3px solid aqua;
+  border:none;
 
+ }
 
 `
 
