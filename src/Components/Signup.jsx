@@ -195,7 +195,7 @@ const Signup = () => {
     const { name, email, password, reEnterPassword } = user;
     
     if (!name || !email || password !== reEnterPassword) {
-      alert("password not matched");
+      alert("invalid input");
       return;
     }
 
@@ -235,7 +235,7 @@ const Signup = () => {
 
     if (name && email && password === reEnterPassword ) {
       const res = await axios
-        .post("http://localhost:9002/register", user)
+        .post("https://full-mernauth.onrender.com/register", user)
         .then((res) => {
 
           alert(res.data.message);
