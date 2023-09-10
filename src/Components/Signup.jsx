@@ -206,30 +206,30 @@ const Signup = () => {
     }
 
 
-    const isStrongPassword = validator.isStrongPassword(password, {
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    });
+    // const isStrongPassword = validator.isStrongPassword(password, {
+    //   minLength: 8,
+    //   minLowercase: 1,
+    //   minUppercase: 1,
+    //   minNumbers: 1,
+    //   minSymbols: 1,
+    // });
 
 
-    if (!validator.isStrongPassword(password, {
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1,
-      minSymbols: 1,
-    })) {
-      alert("Password is too weak. Please include:\n" +
-        "- at least 8 characters\n" +
-        "- at least one lowercase letter\n" +
-        "- at least one uppercase letter\n" +
-        "- at least one number\n" +
-        "- at least one special character\n");
-      return;
-    }
+    // if (!validator.isStrongPassword(password, {
+    //   minLength: 8,
+    //   minLowercase: 1,
+    //   minUppercase: 1,
+    //   minNumbers: 1,
+    //   minSymbols: 1,
+    // })) {
+    //   alert("Password is too weak. Please include:\n" +
+    //     "- at least 8 characters\n" +
+    //     "- at least one lowercase letter\n" +
+    //     "- at least one uppercase letter\n" +
+    //     "- at least one number\n" +
+    //     "- at least one special character\n");
+    //   return;
+    // }
 
  
 
@@ -237,6 +237,7 @@ const Signup = () => {
       const res = await axios
         .post("http://localhost:9002/register", user)
         .then((res) => {
+
           alert(res.data.message);
         });
     } else {
