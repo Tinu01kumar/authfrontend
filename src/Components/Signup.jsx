@@ -233,7 +233,7 @@ const Signup = () => {
 
  
 
-    if (name && email && password === reEnterPassword && isStrongPassword) {
+    if (name && email && password === reEnterPassword ) {
       const res = await axios
         .post("http://localhost:9002/register", user)
         .then((res) => {
