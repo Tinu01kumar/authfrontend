@@ -264,6 +264,9 @@ const [isLoading, setIsLoading] = useState(false);
          
 
      }
+
+     
+     
      
   return (
     <Components>
@@ -297,10 +300,6 @@ const [isLoading, setIsLoading] = useState(false);
             </Inlinediv>
 
 
-            <Checkbox>
-              <input  type="checkbox" ></input>
-              <label>Remember me</label>
-            </Checkbox>
 
 
 

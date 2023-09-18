@@ -11,7 +11,7 @@ import Main from "./Components/Main";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Resume from "./Components/Resume";
-import AdminHeader from "./Components/AdminHeader";
+import Admin from "./Components/Admin";
 import Forgotpassword from "./Components/Forgotpassword";
 import Otpverification from "./Components/Otpverification";
 import Changepassword from "./Components/Changepassword";
@@ -65,7 +65,7 @@ const App = () => {
           path="/admin/api"
           element={<PrivateRoute isAuthenticated={isAuthenticated} userRole={userRole} />}
         >
-          <Route path="/admin/api" element={<AdminHeader />} />
+          <Route path="/admin/api" element={<Admin />} />
         </Route>
       </Routes>
     </Router>
