@@ -200,7 +200,7 @@ const Inlinediv=styled.div`
 let x=VisibilityOffIcon;
 
 
-const Login = ({ setUserRoleOnLogin}) => {
+const Login = ({isUserAuthenticated ,  setUserRoleOnLogin}) => {
   const x=2;
   const y=false;
 
@@ -245,8 +245,9 @@ const [isLoading, setIsLoading] = useState(false);
           sessionStorage.setItem("accessToken", `Bearer ${accessToken}`);
           sessionStorage.setItem("refreshToken", `Bearer ${res.data.refreshToken}`);
           
-          setUserRoleOnLogin(role);
-          
+          if(role==="admin")
+          setUserRoleOnLogin("admin");
+          isUserAuthenticated(true)
           alert(res.data.message);
           
    
