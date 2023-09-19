@@ -36,6 +36,7 @@ const App = () => {
 
   const setUserRoleOnLogin = (role) => {
     setUserRole(role);
+    isUserAuthenticated(true);
   };
 
   return (

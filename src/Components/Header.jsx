@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import HamburgerMenu from "./Hamburgermenu";
+import { useLocation } from "react-router-dom";
 import Navigation from "./Navigation";
 import { useRef } from "react";
 import logo from "./logo.png";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -117,16 +119,26 @@ const Adminbutton = styled.div`
     color: black;
   }
 `;
+const LogoutButton = styled.button`
+  background-color: #ff0000; /* Red background color */
+  color: #ffffff; /* White text color */
+  padding: 8px 16px; /* Padding for the button */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  font-size:1rem;
+  /* Additional styles on hover */
+  &:hover {
+    background-color: #ff3333; /* Lighter red background color on hover */
+  }
+`;
 
-const Header = () => {
+const Header = ( ) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const menuRef = useRef(null);
-
- 
-
-  
 
   const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
@@ -160,40 +172,57 @@ const Header = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
   const gotologin = () => {
     navigate("/login");
   };
-  const gotosignup=()=>{
-navigate("/signup")
-  }
 
-  const gotoadmin=()=>{
-    navigate("/admin/api")
-  }
+  const gotosignup = () => {
+    navigate("/signup");
+  };
 
+  const gotoadmin = () => {
+    navigate("/admin/api");
+  }
 
   const isMobile = windowWidth <= 765;
+ const token=sessionStorage.getItem("accessToken")
+ console.log("dfd" , token);
+ const onLogout = async () => {
+  try {
+    const res = await axios.post("https://full-mernauth.onrender.com/logout", { token });
+    if (res.data.msg === "logout successfull") {
+      navigate("/");
+    } else {
+      // Handle logout failure, e.g., display an error message
+      console.error("Logout failed:", res.data.msg);
+    }
+  } catch (error) {
+    // Handle network or other errors
+    console.error("Error while logging out:", error);
+  }
+};
+
+  
 
   return (
     <Container>
       <Link to="/">
         <Image src={logo}></Image>{" "}
       </Link>
-      {isMobile ? (
+   
+      { location.pathname === "/main" ? (
+        // If authenticated and not on the login page, show the logout button
+        <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+      ) : isMobile ? (
+        // If on mobile and not authenticated, show login and signup buttons
         <AuthLinks>
-          <AuthLink >
+          <AuthLink>
             <Loginbutton onClick={gotologin}>Login</Loginbutton>
           </AuthLink>
           <AuthLink>
-          <Signupbutton onClick={gotosignup}>Signup</Signupbutton>
+            <Signupbutton onClick={gotosignup}>Signup</Signupbutton>
           </AuthLink>
-
-      
-       
-     
-        
-      
-        
           <HamburgerMenu
             isOpen={menuOpen}
             toggleMenu={toggleMenu}
@@ -201,22 +230,15 @@ navigate("/signup")
           />
         </AuthLinks>
       ) : (
-        <>
-          <AuthLinks>
-            <AuthLink>
-              <Loginbutton onClick={gotologin}>Login</Loginbutton>
-            </AuthLink>
-            <AuthLink>
-              <Signupbutton onClick={gotosignup}>Signup</Signupbutton>
-              
-            </AuthLink>
-
-           
-       
-
-
-          </AuthLinks>
-        </>
+        // If on desktop and not authenticated, show login and signup buttons
+        <AuthLinks>
+          <AuthLink>
+            <Loginbutton onClick={gotologin}>Login</Loginbutton>
+          </AuthLink>
+          <AuthLink>
+            <Signupbutton onClick={gotosignup}>Signup</Signupbutton>
+          </AuthLink>
+        </AuthLinks>
       )}
       {isMobile && <Navigation isOpen={menuOpen} ref={menuRef} />}
     </Container>
