@@ -64,7 +64,7 @@ const Main = ({userRole}) => {
   });
   const renderHeader = () => {
     if (userRole === "admin") {
-      return <AdminHeader />;
+      return <Header />;
     } else {
       return <Header />;
     }
