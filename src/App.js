@@ -61,13 +61,8 @@ const App = () => {
         <Route path="/changepassword/:id" element={<Changepassword />} />
         <Route path="/verify/:token" element={<Verify />} />
 
-        {/* Add a private route for the Admin API */}
-        <Route
-          path="/admin/api"
-          element={<PrivateRoute isAuthenticated={isAuthenticated} userRole={userRole} />}
-        >
-          <Route path="/admin/api" element={<Admin />} />
-        </Route>
+       
+    
       </Routes>
     </Router>
   );
